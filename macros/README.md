@@ -68,8 +68,10 @@ Functions such as `printf()` do not have fixed signatures. That is, they
 may accept a variable number of parameters of varying types. Linux and
 Apple Silicon handle these functions quite differently.
 
-This is [explained at length in the chapter on variadic
-functions](../more/apple_silicon/README.md).
+This is covered in the dedicated [chapter on variadic
+functions](../more/varargs/README.md) and in the [Apple Silicon
+chapter](../more/apple_silicon/README.md), which details how
+Apple and Linux diverge.
 
 ## Macros of general use
 
@@ -114,8 +116,8 @@ the macro performs a `cmp` which subtracts `src_b` from `src_a`
 (discarding the results) in order to set the flags to be interpreted by
 the following `csel`.
 
-Thank you to u/TNorthover for nudge to add the cmp directly into the
-macro.
+Thank you to u/TNorthover for the nudge to add the cmp directly into
+the macro.
 
 Signature:
 
@@ -128,6 +130,20 @@ Signature:
 `MAX     src_a, src_b, dest`
 
 The larger of `src_a` and `src_b` is put into `dest`.
+
+### MOD
+
+AARCH64 has no single modulo instruction. This macro composes the
+standard `sdiv` / `msub` pair to produce `src_a mod src_b`. A caller-
+supplied scratch register is required because the quotient must be
+materialized before the multiply-subtract step.
+
+Signature:
+
+`MOD     src_a, src_b, dest, scratch`
+
+On completion, `dest` holds `src_a mod src_b`; `scratch` is
+clobbered.
 
 ### Mark a label as global
 

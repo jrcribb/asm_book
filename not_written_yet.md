@@ -2,7 +2,7 @@
 
 You've landed on a placeholder page.
 
-Please leave a comment here on github indicating which
+Please leave a comment here on GitHub indicating which
 material you're anxious to have covered.
 
 Thank you,
