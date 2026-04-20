@@ -14,14 +14,14 @@ A CPU might be on one board while RAM was on another board and had to be
 accessed over a shared bus. CPUs got still smaller and faster and might
 be on one chip and RAM on another set of chips.
 
-The idea of registers were introduced a very long time ago as being
+The idea of registers was introduced a very long time ago as being
 super fast storage that is implemented directly in the CPU. Because they
 are within the CPU, distance isn't really an issue. Similarly, because
-they are in the CPU, they operate as the speed of the CPU itself.
+they are in the CPU, they operate at the speed of the CPU itself.
 
 Registers don't have addresses because they are not in memory. Instead
 they have names and naming conventions. They have only a minimal concept
-of typing as apart from integer, floating point (single or double
+of typing: apart from integer, floating point (single or double
 precision) and pointer, every other notion of "type" is syntactic sugar
 provided by your language and its compiler.
 
@@ -62,8 +62,8 @@ Some register types have been left out.
 
 Registers do not have to be declared. They simply ARE.
 
-There are 32 integer registers but some, like x30 are used for specific
-purposes. x31 is also not available.
+There are 32 integer registers but some, like x30, are used for specific
+purposes. x31 has a special role (explained later).
 
 When you want a 64 bit integer operation you use an x register. For all
 other integer operations, you use a w register and further specify the
@@ -99,7 +99,7 @@ you will likely never hear of them again.
 
 Remember what RISC means? *Reduced Instruction Set*? Well, that was
 then. This is now. AARCH64 has an enormous instruction set - hundreds of
-instructions each potentially has many variations. You will be
+instructions, each potentially with many variations. You will be
 responsible for mastering every one.
 
 Kidding - you won't be responsible for too too many. Relatively few.
@@ -118,7 +118,7 @@ CISC (Complex Instruction Set Computer) nature of the Intel processors.
 The x86 and x64 ISA has variable length instructions ranging from 1 to
 15 bytes in length! Complex indeed!
 
-Every instruction is specified by an mnemonic consisting of some letters
+Every instruction is specified by a mnemonic consisting of some letters
 which the *assembler* converts into numeric *op-codes*.
 
 Most (but not all) AARCH64 instructions have three *operands*. These
@@ -134,7 +134,7 @@ means:
     ra = rb op rc
 ```
 
-For a concrete examples:
+For a concrete example:
 
 ```asm
     sub    x0, x0, x1
@@ -163,8 +163,8 @@ Or:
 ## Mixing Register Types
 
 With few exceptions, different register types cannot be part of the same
-instruction. For example adding a 64 bit register to a 32 bit register
-cannot be done. For example:
+instruction. Adding a 64 bit register to a 32 bit register cannot be
+done. For example:
 
 Given:
 
